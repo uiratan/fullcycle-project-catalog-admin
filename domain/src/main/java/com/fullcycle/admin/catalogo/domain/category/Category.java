@@ -1,6 +1,7 @@
 package com.fullcycle.admin.catalogo.domain.category;
 
 import com.fullcycle.admin.catalogo.domain.AggregateRoot;
+import com.fullcycle.admin.catalogo.domain.validation.ValidationHandler;
 
 import java.time.Instant;
 
@@ -35,6 +36,12 @@ public class Category extends AggregateRoot<CategoryID> {
     final var id = CategoryID.unique();
     final var now = Instant.now();
     return new Category(id, aName, aDescription, isActive, now, now, null);
+  }
+
+  @Override
+  public void validate(final ValidationHandler handler) {
+    CategoryValidator categoryValidator = new CategoryValidator(this, handler);
+    categoryValidator.validate();
   }
 
   public CategoryID getId() {
