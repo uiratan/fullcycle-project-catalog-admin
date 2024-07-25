@@ -3,7 +3,6 @@ package com.fullcycle.admin.catalogo.domain.category;
 import com.fullcycle.admin.catalogo.domain.AggregateRoot;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public class Category extends AggregateRoot<CategoryID> {
 
@@ -19,17 +18,17 @@ public class Category extends AggregateRoot<CategoryID> {
           final String aName,
           final String aDescription,
           final boolean isActive,
-          final Instant aCreationdAt,
-          final Instant aUpdateAt,
-          final Instant aDeleteAt
+          final Instant aCreationDate,
+          final Instant aUpdateDate,
+          final Instant aDeleteDate
   ) {
     super(anId);
     this.name = aName;
     this.description = aDescription;
     this.active = isActive;
-    this.createdAt = aCreationdAt;
-    this.updatedAt = aUpdateAt;
-    this.deletedAt = aDeleteAt;
+    this.createdAt = aCreationDate;
+    this.updatedAt = aUpdateDate;
+    this.deletedAt = aDeleteDate;
   }
 
   public static Category newCategory(final String aName, final String aDescription, final boolean isActive) {
