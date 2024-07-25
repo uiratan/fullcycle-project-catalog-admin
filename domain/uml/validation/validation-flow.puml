@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+title Category.validate(final ValidationHandler handler) flow
+hide footbox
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+participant ThrowsValidationHandler <<implements ValidationHandler>>
+note left of ThrowsValidationHandler
+  ValidationHandler append(Error anError);
+  ValidationHandler append(ValidationHandler anHandler);
+  ValidationHandler validate(Validation aValidation);
+  List<Error> getErrors();
+end note
+
+CategoryTest -> ThrowsValidationHandler : new()
+return actualHandlher
+
+CategoryTest -> Category : validate(actualHandlher)
+
+participant CategoryValidator <<extends Validator>>
+Category -> CategoryValidator : new(this, actualHandlher)
+
+CategoryValidator -> CategoryValidator : ValidationHandler handler = aHandler
+note left : from Validator
+
+CategoryValidator -> CategoryValidator : Category category = category
+
+CategoryValidator -> Category : categoryValidator
+
+Category -> CategoryValidator : validate()
+
+participant Error <<record>>
+note right of CategoryValidator : if isNameEmpty
+CategoryValidator -> Error : new Error("'name' should not be null")
+
+return error
+
+CategoryValidator -> ThrowsValidationHandler : append(error);
+
+ThrowsValidationHandler -> DomainException : with(List.of(error))
+DomainException -> DomainException : new DomainException(error)
+'return new DomainException(anErrors);
+
+DomainException -> RuntimeException
+return excepetion
+
+DomainException -> DomainException : this.errors = anErrors
+
+DomainException -> ThrowsValidationHandler : DomainException(anErrors)
+note left of ThrowsValidationHandler
+throw DomainException.with(List.of(anError));
+end note
+
+@enduml

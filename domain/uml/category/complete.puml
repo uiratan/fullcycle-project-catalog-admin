@@ -1,0 +1,111 @@
+@startuml
+class com.fullcycle.admin.catalogo.domain.category.Category {
+- String name
+- String description
+- boolean active
+- Instant createdAt
+- Instant updatedAt
+- Instant deletedAt
+- <<Create>> Category(CategoryID,String,String,boolean,Instant,Instant,Instant)
++ {static} Category newCategory(String,String,boolean)
++ void validate(ValidationHandler)
++ CategoryID getId()
++ String getName()
++ String getDescription()
++ boolean isActive()
++ Instant getCreatedAt()
++ Instant getUpdatedAt()
++ Instant getDeletedAt()
+}
+
+
+abstract class com.fullcycle.admin.catalogo.domain.Entity {
+# ID id
+# <<Create>> Entity(ID)
++ {abstract}void validate(ValidationHandler)
++ ID getId()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class com.fullcycle.admin.catalogo.domain.category.CategoryID {
+# String value
+- <<Create>> CategoryID(String)
++ {static} CategoryID unique()
++ {static} CategoryID from(String)
++ {static} CategoryID from(UUID)
++ String getValue()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class com.fullcycle.admin.catalogo.domain.validation.handler.ThrowsValidationHandler {
++ ValidationHandler append(Error)
++ ValidationHandler append(ValidationHandler)
++ ValidationHandler validate(Validation)
++ List<Error> getErrors()
+}
+
+abstract class com.fullcycle.admin.catalogo.domain.ValueObject {
+}
+abstract class com.fullcycle.admin.catalogo.domain.validation.Validator {
+- ValidationHandler handler
+# <<Create>> Validator(ValidationHandler)
++ {abstract}void validate()
+# ValidationHandler validationHandler()
+}
+
+
+abstract class com.fullcycle.admin.catalogo.domain.AggregateRoot {
+# <<Create>> AggregateRoot(ID)
+}
+
+interface com.fullcycle.admin.catalogo.domain.validation.ValidationHandler {
+~ ValidationHandler append(Error)
+~ ValidationHandler append(ValidationHandler)
+~ ValidationHandler validate(Validation)
+~ List<Error> getErrors()
+~ boolean hasError()
+}
+
+interface com.fullcycle.admin.catalogo.domain.validation.ValidationHandler$Validation {
+~ void validate()
+}
+
+class com.fullcycle.admin.catalogo.domain.category.CategoryValidator {
+- Category category
++ <<Create>> CategoryValidator(Category,ValidationHandler)
++ void validate()
+}
+
+
+class com.fullcycle.admin.catalogo.domain.exception.DomainException {
+- List<Error> errors
+- <<Create>> DomainException(List<Error>)
++ {static} DomainException with(List<Error>)
++ List<Error> getErrors()
+}
+
+
+class com.fullcycle.admin.catalogo.domain.validation.Error {
+- String message
++ <<Create>> Error(String)
++ String message()
+}
+
+
+abstract class com.fullcycle.admin.catalogo.domain.Identifier {
+}
+
+
+com.fullcycle.admin.catalogo.domain.AggregateRoot <|-- com.fullcycle.admin.catalogo.domain.category.Category
+com.fullcycle.admin.catalogo.domain.Identifier <|-- com.fullcycle.admin.catalogo.domain.category.CategoryID
+com.fullcycle.admin.catalogo.domain.validation.ValidationHandler <|.. com.fullcycle.admin.catalogo.domain.validation.handler.ThrowsValidationHandler
+com.fullcycle.admin.catalogo.domain.Entity <|-- com.fullcycle.admin.catalogo.domain.AggregateRoot
+com.fullcycle.admin.catalogo.domain.validation.ValidationHandler +.. com.fullcycle.admin.catalogo.domain.validation.ValidationHandler$Validation
+com.fullcycle.admin.catalogo.domain.validation.Validator <|-- com.fullcycle.admin.catalogo.domain.category.CategoryValidator
+com.fullcycle.admin.catalogo.domain.exception.RuntimeException <|-- com.fullcycle.admin.catalogo.domain.exception.DomainException
+com.fullcycle.admin.catalogo.domain.ValueObject <|-- com.fullcycle.admin.catalogo.domain.Identifier
+@enduml

@@ -1,0 +1,92 @@
+@startuml
+interface validation.ValidationHandler {
+~ ValidationHandler append(Error)
+~ ValidationHandler append(ValidationHandler)
+~ ValidationHandler validate(Validation)
+~ List<Error> getErrors()
+~ boolean hasError()
+}
+
+interface validation.ValidationHandler$Validation {
+~ void validate()
+}
+
+class category.Category {
+- String name
+- String description
+- boolean active
+- Instant createdAt
+- Instant updatedAt
+- Instant deletedAt
+__
+- <<Create>> Category(CategoryID,String,String,boolean,Instant,Instant,Instant)
++ {static} Category newCategory(String,String,boolean)
++ void validate(ValidationHandler)
+.. getters ..
++ CategoryID getId()
++ String getName()
++ String getDescription()
++ boolean isActive()
++ Instant getCreatedAt()
++ Instant getUpdatedAt()
++ Instant getDeletedAt()
+}
+
+class category.CategoryValidator {
+- Category category
++ <<Create>> CategoryValidator(Category,ValidationHandler)
++ void validate()
+}
+
+
+class exception.DomainException {
+- List<Error> errors
+- <<Create>> DomainException(List<Error>)
++ {static} DomainException with(List<Error>)
++ List<Error> getErrors()
+}
+
+
+class validation.handler.ThrowsValidationHandler {
++ <<Create>> ThrowsValidationHandler()
++ ValidationHandler append(Error)
++ ValidationHandler append(ValidationHandler)
++ ValidationHandler validate(Validation)
++ List<Error> getErrors()
+}
+
+class validation.Error {
+- String message
++ <<Create>> Error(String)
++ String message()
+}
+
+
+abstract class validation.Validator {
+- ValidationHandler handler
+# <<Create>> Validator(ValidationHandler)
++ {abstract}void validate()
+# ValidationHandler validationHandler()
+}
+
+
+
+class tests.CategoryTest {
++ testarExceptionDeCategory
+}
+
+CategoryTest::testarExceptionDeCategory -r-> category.Category::validate
+CategoryTest::testarExceptionDeCategory --> ThrowsValidationHandler::Create
+
+category.Category::validate -- category.CategoryValidator
+
+Validator <|-u- CategoryValidator
+ValidationHandler +.l. ValidationHandler$Validation
+ValidationHandler <|-- ThrowsValidationHandler
+RuntimeException <|-- DomainException
+
+Validator -- ValidationHandler
+ValidationHandler -r- Error
+
+
+@enduml

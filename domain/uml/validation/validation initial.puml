@@ -1,0 +1,77 @@
+@startuml
+class Category {
+- String name
+- String description
+- boolean active
+- Instant createdAt
+- Instant updatedAt
+- Instant deletedAt
+__
+- <<Create>> Category(CategoryID,String,String,boolean,Instant,Instant,Instant)
++ {static} Category newCategory(String,String,boolean)
++ void validate(ValidationHandler)
+.. getters ..
++ CategoryID getId()
++ String getName()
++ String getDescription()
++ boolean isActive()
++ Instant getCreatedAt()
++ Instant getUpdatedAt()
++ Instant getDeletedAt()
+}
+
+class ThrowsValidationHandler {
++ ValidationHandler append(Error)
++ ValidationHandler append(ValidationHandler)
++ ValidationHandler validate(Validation)
++ List<Error> getErrors()
+}
+
+interface ValidationHandler {
+~ ValidationHandler append(Error)
+~ ValidationHandler append(ValidationHandler)
+~ ValidationHandler validate(Validation)
+~ List<Error> getErrors()
+~ boolean hasError()
+}
+
+interface ValidationHandler$Validation {
+~ void validate()
+}
+
+abstract class Validator {
+- ValidationHandler handler
+# <<Create>> Validator(ValidationHandler)
++ {abstract}void validate()
+# ValidationHandler validationHandler()
+}
+
+class CategoryValidator {
+- Category category
++ <<Create>> CategoryValidator(Category,ValidationHandler)
++ void validate()
+}
+
+
+class DomainException {
+- List<Error> errors
+- <<Create>> DomainException(List<Error>)
++ {static} DomainException with(List<Error>)
++ List<Error> getErrors()
+}
+
+
+class Error {
+- String message
++ <<Create>> Error(String)
++ String message()
+}
+
+'RuntimeException <|-- DomainException
+'ValidationHandler <|.. ThrowsValidationHandler
+'ValidationHandler +.. ValidationHandler$Validation
+'Validator <|-- CategoryValidator
+'Category::validate --> CategoryValidator
+'Category::validate --> ThrowsValidationHandler
+
+@enduml
