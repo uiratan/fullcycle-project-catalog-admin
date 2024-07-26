@@ -38,6 +38,8 @@ class application.category.create.DefaultCreateCategoryUseCase {
 + CreateCategoryOutput execute(CreateCategoryCommand)
 }
 
+interface domain.category.CategoryGateway {}
+
 application.UseCase <|-- application.category.create.CreateCategoryUseCase
 application.category.create.CreateCategoryUseCase <|-- application.category.create.DefaultCreateCategoryUseCase
 application.category.create.CreateCategoryUseCase -l-> CreateCategoryCommand
