@@ -1,0 +1,49 @@
+@startuml
+abstract class application.NullaryUseCase<OUT> {
++ {abstract}OUT execute()
+}
+
+abstract class application.UnitUseCase<IN> {
++ {abstract}void execute(IN)
+}
+
+abstract class application.UseCase<IN, OUT> {
++ {abstract}OUT execute(IN)
+}
+
+class application.category.create.CreateCategoryCommand <<Record>> {
+- String name
+- String description
+- boolean isActive
++ <<Create>> CreateCategoryCommand(String,String,boolean)
++ {static} CreateCategoryCommand with(String,String,boolean)
++ boolean isActive()
++ String description()
++ String name()
+}
+
+class application.category.create.CreateCategoryOutput <<Record>> {
+- CategoryID id
++ <<Create>> CreateCategoryOutput(CategoryID)
++ {static} CreateCategoryOutput from(Category)
++ CategoryID id()
+}
+
+abstract class application.category.create.CreateCategoryUseCase {
+}
+
+class application.category.create.DefaultCreateCategoryUseCase {
+- CategoryGateway categoryGateway
++ <<Create>> DefaultCreateCategoryUseCase(CategoryGateway)
++ CreateCategoryOutput execute(CreateCategoryCommand)
+}
+
+application.UseCase <|-- application.category.create.CreateCategoryUseCase
+application.category.create.CreateCategoryUseCase <|-- application.category.create.DefaultCreateCategoryUseCase
+application.category.create.CreateCategoryUseCase -l-> CreateCategoryCommand
+application.category.create.CreateCategoryUseCase -> CreateCategoryOutput
+
+application.category.create.DefaultCreateCategoryUseCase --> domain.category.Category
+application.category.create.DefaultCreateCategoryUseCase --> domain.category.CategoryGateway
+application.category.create.DefaultCreateCategoryUseCase --> domain.validation.handler.ThrowsValidationHandler
+@enduml
