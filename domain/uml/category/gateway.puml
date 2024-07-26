@@ -1,0 +1,29 @@
+@startuml
+interface category.CategoryGateway {
++ create(aCategory: Category): Category
++ deleteById(anID: CategoryID)
++ findById(anID: CategoryID): Optional<Category>
++ update(aCategory: Category): Category
++ findAll(aQuery: CategorySearchQuery): Pagination<Category>
+}
+
+class category.CategorySearchQuery <<Record>> {
+   int page,
+   int perPage,
+   String terms,
+   String sort,
+   String direction
+}
+
+class pagination.Pagination<T> <<Record>> {
+  int currentPage,
+  int perPage,
+  int total,
+  List<T> items
+}
+
+
+CategoryGateway -r-> Pagination
+CategoryGateway --> CategorySearchQuery
+
+@enduml

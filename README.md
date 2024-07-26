@@ -9,23 +9,23 @@
 - [PlantUML Integration](https://plugins.jetbrains.com/plugin/7017-plantuml-integration)
 - [PlantUML Parser](https://plugins.jetbrains.com/plugin/15524-plantuml-parser)
 
-# Main classes (DDD)
-![img.png](images/img3.png)
-
-## Category domain
+# Main domain classes (DDD)
 ![img.png](images/img.png)
+
+# Catalog domain
+![img.png](images/img2.png)
 
 - Filmes
 - Séries
 - Documentários
 - etc
 
-## Entity Validations
+# Entity Validations
 - Entities knows how to self validate
 
-![img.png](images/img5.png)
+![img.png](images/img3.png)
 
-![img_1.png](images/img_1.png)
+![img_1.png](images/img4.png)
 
 ```
 é criado um objeto Category
@@ -65,6 +65,10 @@ a execução volta pro teste por causa da exception
 
 actualException recebe a exceção DomainException que contem a lista de erros
 ```
+
+# Gateway
+
+![img.png](images/img5.png)
 
 # References
 - [Notification patter - Fowler](https://martinfowler.com/eaaDev/Notification.html)
