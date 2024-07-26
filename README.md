@@ -72,7 +72,10 @@ actualException recebe a exceção DomainException que contem a lista de erros
 - UseCase implementations
 - Generally uses the Command Pattern
   - Carrega semântica no nome da classe
-  - Tem um único método público chamado execute
+  - Tem um único método público chamado execute|
+- Tests
+  - [Mockito](https://site.mockito.org/): necessário para simular os comportamentos de interfaces sem ter que criar suas classes de implementação.
+  - Caminho feliz
 
 ![img.png](.images/img6.png)
 
