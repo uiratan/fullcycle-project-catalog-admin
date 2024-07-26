@@ -15,14 +15,14 @@
 - Documentários
 - etc
 
-![img.png](images/img2.png)
+![img.png](.images/img2.png)
 
 ## Entity Validations
 - Entities knows how to self validate
 
-![img.png](images/img3.png)
+![img.png](.images/img3.png)
 
-![img_1.png](images/img4.png)
+![img_1.png](.images/img4.png)
 
 ```
 é criado um objeto Category
@@ -65,8 +65,29 @@ actualException recebe a exceção DomainException que contem a lista de erros
 
 ## Gateway
 
-![img.png](images/img5.png)
+![img.png](.images/img5.png)
 
 # Application
 
+- UseCase implementations
+- Generally uses the Command Pattern
+  - Carrega semântica no nome da classe
+  - Tem um único método público chamado execute
+
+![img.png](.images/img6.png)
+
 # Infrastructure
+
+# References
+- [Notification patter - Fowler](https://martinfowler.com/eaaDev/Notification.html)
+- [Replacing Throwing Exceptions with Notification in Validations](https://martinfowler.com/articles/replaceThrowWithNotification.html)  
+- Implementing Domain-Driven Design
+  - Chapter 5 Entities - Discovering Entities and Their Intrinsic Characteristics - Validation
+- [Notification Pattern – Estão te vendendo um conceito errado](https://gago.io/blog/2019-04-28-notification-pattern/)
+- [Não lance Exceptions em seu Domínio… Use Notifications!](https://www.wellingtonjhn.com/posts/n%C3%A3o-lance-exceptions-em-seu-dom%C3%ADnio-use-notifications/)
+
+
+- [Fluent interface - Fowler](https://martinfowler.com/bliki/FluentInterface.html)
+- [Fluent interface - Wikipedia](https://en.wikipedia.org/wiki/Fluent_interface)
+- [Difference Between Fluent Interface and Builder Pattern in Java](https://www.baeldung.com/java-fluent-interface-vs-builder-pattern)
+
