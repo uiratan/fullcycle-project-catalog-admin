@@ -67,7 +67,7 @@ actualException recebe a exceção DomainException que contem a lista de erros
 
 ![img.png](.images/img5.png)
 
-# Application
+# Application module
 
 - UseCase implementations
 - Generally uses the Command Pattern
@@ -79,7 +79,11 @@ actualException recebe a exceção DomainException que contem a lista de erros
 
 ![img.png](.images/img6.png)
 
-# Infrastructure
+![img.png](.images/img7.png)
+
+# Infrastructure module
+
+
 
 # References
 - [Notification patter - Fowler](https://martinfowler.com/eaaDev/Notification.html)
