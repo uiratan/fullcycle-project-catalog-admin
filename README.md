@@ -90,4 +90,3 @@ actualException recebe a exceção DomainException que contem a lista de erros
 - [Fluent interface - Fowler](https://martinfowler.com/bliki/FluentInterface.html)
 - [Fluent interface - Wikipedia](https://en.wikipedia.org/wiki/Fluent_interface)
 - [Difference Between Fluent Interface and Builder Pattern in Java](https://www.baeldung.com/java-fluent-interface-vs-builder-pattern)
-
