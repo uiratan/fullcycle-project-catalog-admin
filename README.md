@@ -9,18 +9,15 @@
 - [PlantUML Integration](https://plugins.jetbrains.com/plugin/7017-plantuml-integration)
 - [PlantUML Parser](https://plugins.jetbrains.com/plugin/15524-plantuml-parser)
 
-# Main domain classes (DDD)
-![img.png](images/img.png)
-
-# Catalog domain
-![img.png](images/img2.png)
-
+# Domain module
 - Filmes
 - Séries
 - Documentários
 - etc
 
-# Entity Validations
+![img.png](images/img2.png)
+
+## Entity Validations
 - Entities knows how to self validate
 
 ![img.png](images/img3.png)
@@ -66,23 +63,10 @@ a execução volta pro teste por causa da exception
 actualException recebe a exceção DomainException que contem a lista de erros
 ```
 
-# Gateway
+## Gateway
 
 ![img.png](images/img5.png)
 
-# References
-- [Notification patter - Fowler](https://martinfowler.com/eaaDev/Notification.html)
-  - _"You should use Notification whenever validation is done by a layer of code that cannot have a direct dependency to the module that initiates the validation."_
-  - _"It's usually more helpful to show every validation error, particular if validation requires a round trip to a remote domain layer."_
-- Implementing Domain-Driven Design
-  - Chapter 5 Entities - Discovering Entities and Their Intrinsic Characteristics - Validation
-- [Notification Pattern no DDD](https://www.anselme.com.br/2023/06/28/notification-pattern-no-ddd/)
-- [Validation Pattern no Domain Driven Design](https://www.anselme.com.br/2023/04/12/validation-pattern-no-domain-driven-design/)
-- [Notification Pattern – Estão te vendendo um conceito errado](https://gago.io/blog/2019-04-28-notification-pattern/)
-- [Não lance Exceptions em seu Domínio… Use Notifications!](https://www.wellingtonjhn.com/posts/n%C3%A3o-lance-exceptions-em-seu-dom%C3%ADnio-use-notifications/)
+# Application
 
-
-- [Fluent interface - Fowler](https://martinfowler.com/bliki/FluentInterface.html)
-- [Fluent interface - Wikipedia](https://en.wikipedia.org/wiki/Fluent_interface)
-- [Difference Between Fluent Interface and Builder Pattern in Java](https://www.baeldung.com/java-fluent-interface-vs-builder-pattern)
-- 
+# Infrastructure
